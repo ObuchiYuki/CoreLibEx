@@ -6,18 +6,10 @@ import PackageDescription
 let package = Package(
     name: "CoreLibEx",
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "CoreLibEx",
-            targets: ["CoreLibEx"]),
+        .library(name: "CoreLibEx", targets: ["CoreLibEx"]),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "CoreLibEx"),
-        .testTarget(
-            name: "CoreLibExTests",
-            dependencies: ["CoreLibEx"]),
+        .target(name: "CoreLibEx"),
+        .testTarget(name: "CoreLibExTests", dependencies: ["CoreLibEx"]),
     ]
 )
