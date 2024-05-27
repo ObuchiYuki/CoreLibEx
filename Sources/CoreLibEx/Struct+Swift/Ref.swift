@@ -7,6 +7,8 @@
 //
 import Foundation
 
+
+
 /// structを参照型にするため
 public final class Ref<T> {
     public var value: T

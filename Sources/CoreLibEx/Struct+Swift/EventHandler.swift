@@ -6,16 +6,31 @@
 //
 
 final public class EventHandler<T> {
-    @usableFromInline var handlers = [(T) -> ()]()
+    public typealias DisposeID = UInt64
+    
+    @usableFromInline var handlers = [DisposeID: (T) -> ()]()
     
     @inlinable public init() {}
     
-    @inlinable public func on(_ handler: @escaping (T) -> ()) {
-        self.handlers.append(handler)
+    @inlinable public func on(_ handler: @escaping (T) -> ()) -> DisposeID {
+        var id: DisposeID
+
+        repeat {
+            id = DisposeID.random(in: .min ... .max)
+        } while self.handlers[id] != nil
+        
+        self.handlers[id] = handler
+        return id
     }
     
     @inlinable public func emit(_ value: T) {
-        self.handlers.forEach{ $0(value) }
+        for handler in self.handlers.values {
+            handler(value)
+        }
+    }
+    
+    @inlinable public func off(_ id: DisposeID) {
+        self.handlers[id] = nil
     }
 }
 
