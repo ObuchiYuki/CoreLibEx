@@ -24,13 +24,15 @@ public func => <T>(lhs: T, rhs: (T) throws -> Void) rethrows -> T {
 }
 
 @inlinable @_transparent @inline(__always)
-@discardableResult func &=> <T>(lhs: inout T, rhs: (inout T) -> Void) -> T {
+@discardableResult 
+public func &=> <T>(lhs: inout T, rhs: (inout T) -> Void) -> T {
     rhs(&lhs)
     return lhs
 }
 
 @inlinable @_transparent @inline(__always)
-@discardableResult func &=> <T>(lhs: T, rhs: (inout T) -> Void) -> T {
+@discardableResult 
+public func &=> <T>(lhs: T, rhs: (inout T) -> Void) -> T {
     var lhs = lhs
     rhs(&lhs)
     return lhs
